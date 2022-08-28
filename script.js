@@ -201,6 +201,10 @@ function editTask(e){
     }
   })
 
+  let inputs = document.querySelectorAll('input')
+  inputs[0].setAttribute('disabled' , 'disabled')
+  inputs[1].setAttribute('disabled' , 'disabled')
+  
 }
 
 function deleteTask(e){
@@ -245,8 +249,10 @@ function render(){
   todoList.innerHTML = ''
   todos.forEach( todo => {
     let element = document.createElement('div')
-    element.innerText = `${todo.title} : ${todo.duedate}`
     element.id = todo.id
+    
+    let label = document.createElement('label')
+    label.innerText = `${todo.title} : ${todo.duedate}`
 
     let editBtn = document.createElement('button')
     editBtn.innerText = 'Edit'
@@ -268,9 +274,11 @@ function render(){
     checkbox.onchange = completedTask
     checkbox.checked = todo.completed == 'Yes' ? true : false
 
+    label.prepend(checkbox)
+
     element.append(editBtn)
     element.append(deleteBtn)
-    element.prepend(checkbox)
+    element.prepend(label)
 
     todoList.append(element)
     completedStatus(element)
@@ -279,6 +287,10 @@ function render(){
   leftTasks()
   addTaskBtn.removeAttribute('disabled')
   deleteTaskBtn.removeAttribute('disabled')
+  
+  let inputs = document.querySelectorAll('input')
+  inputs[0].removeAttribute('disabled')
+  inputs[1].removeAttribute('disabled')
 }
 
 render()
