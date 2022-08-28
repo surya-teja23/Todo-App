@@ -235,10 +235,11 @@ function leftTasks(){
 
 function completedStatus(element){
   let id = element.id
+  let label = element.querySelector('label')
   let btns = element.querySelectorAll('button')
   todos.forEach(todo => {
     if (todo.id == id && todo.completed == 'Yes'){
-      element.classList.add('text-decoration-line-through')
+      label.classList.add('text-decoration-line-through')
       btns.forEach(btn => btn.setAttribute('disabled' , 'disabled'))
     }
   })
